@@ -1,3 +1,6 @@
+#ifndef FS_H
+#define FS_H
+
 #define MAX_NAME 32
 #define MAX_CHILD 16
 
@@ -13,3 +16,10 @@ typedef struct FSNode {
     struct FSNode* children[MAX_CHILD];
     int child_count;
 } FSNode;
+
+extern FSNode* root;
+extern FSNode* cwd;
+
+void fs_init();
+
+#endif
