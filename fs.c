@@ -4,7 +4,7 @@
 #include "fs.h"
 
 FSNode* root;
-FSNode* cwd; // current working directory
+FSNode* cwd;
 
 void fs_init() {
     root = (FSNode*)malloc(sizeof(FSNode));
@@ -14,6 +14,4 @@ void fs_init() {
     root->child_count = 0;
 
     cwd = root;
-
-    printf("[fs] initialized\n");
 }
