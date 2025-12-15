@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "command.h"
+#include "path.h"
 
 void execute_command(char *input) {
     char cmd[32], arg[128];
