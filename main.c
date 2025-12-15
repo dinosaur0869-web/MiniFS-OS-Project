@@ -4,6 +4,7 @@
 #include "path.h"
 
 int main() {
+  fs_init();
   char input[256];
 
   printf("Welcome to MiniFS(by MCU OS class team 8)\n");
