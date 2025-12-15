@@ -17,6 +17,7 @@ typedef struct FSNode {
     int child_count;
 } FSNode;
 
+/* 這兩行非常重要 */
 extern FSNode* root;
 extern FSNode* cwd;
 
