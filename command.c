@@ -32,7 +32,15 @@ void cmd_ls(char *path) {
 }
 
 void cmd_mkdir(char *path) {
+    char parts[10][32];
+    int n = split_path(path, parts);
+
     printf("[mkdir] path = %s\n", path);
+    printf("split result:\n");
+
+    for (int i = 0; i < n; i++) {
+        printf("  part[%d] = %s\n", i, parts[i]);
+    }
 }
 
 void cmd_touch(char *path) {
