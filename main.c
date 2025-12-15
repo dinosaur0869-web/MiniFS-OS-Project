@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "command.h"
-#include "path.h"
+#include "fs.h"
 
 int main() {
   fs_init();
