@@ -25,23 +25,52 @@ void execute_command(char *input) {
 }
 
 void cmd_ls(char *path) {
-    if (strlen(path) == 0)
-        printf("[ls] current directory\n");
-    else
-        printf("[ls] path = %s\n", path);
+    FSNode* cur = cwd;
+
+    for (int i = 0; i < cur->child_count; i++) {
+        printf("%s  ", cur->children[i]->name);
+    }
+    printf("\n");
 }
+
 
 void cmd_mkdir(char *path) {
     char parts[10][32];
     int n = split_path(path, parts);
 
-    printf("[mkdir] path = %s\n", path);
-    printf("split result:\n");
+    FSNode* cur = cwd;
 
     for (int i = 0; i < n; i++) {
-        printf("  part[%d] = %s\n", i, parts[i]);
+        // 找 child
+        FSNode* next = NULL;
+        for (int j = 0; j < cur->child_count; j++) {
+            if (strcmp(cur->children[j]->name, parts[i]) == 0) {
+                next = cur->children[j];
+                break;
+            }
+        }
+
+        if (next == NULL) {
+            // 最後一層才建立
+            if (i == n - 1) {
+                FSNode* node = malloc(sizeof(FSNode));
+                strcpy(node->name, parts[i]);
+                node->type = TYPE_DIR;
+                node->parent = cur;
+                node->child_count = 0;
+
+                cur->children[cur->child_count++] = node;
+                printf("Directory created: %s\n", parts[i]);
+                return;
+            } else {
+                printf("Path not found\n");
+                return;
+            }
+        }
+        cur = next;
     }
 }
+
 
 void cmd_touch(char *path) {
     printf("[touch] path = %s\n", path);
